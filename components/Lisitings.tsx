@@ -1,8 +1,8 @@
-import { FlatList, Image, ListRenderItem, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native'
+import { FlatList, Image, ListRenderItem, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { ListingType } from '@/types'
 import colors from '@/constant/colors'
-import { Ionicons } from '@expo/vector-icons'
+import { FontAwesome5, Ionicons } from '@expo/vector-icons'
 
 interface PropsType {
     listings: any[]
@@ -18,11 +18,20 @@ const Lisitings = ({ listings }: PropsType) => {
     const renderItems: ListRenderItem<ListingType> = ({ item }) => {
 
         return (
+
             <TouchableOpacity >
                 <View style={styles.item}>
                     <Image source={{ uri: item.image }} style={styles.image} />
                     <View style={styles.bookmark}>
-                        <Ionicons name='bookmark' color={colors.white} size={20} />
+                        <Ionicons name='bookmark-outline' color={colors.white} size={20} />
+                    </View>
+                    <Text style={styles.itemText} numberOfLines={1} ellipsizeMode='tail'>{item.name}</Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 2 }}>
+                            <FontAwesome5 name="map-marker-alt" size={18} color={colors.primaryColor} />
+                            <Text style={styles.locationText}>{item.location}</Text>
+                        </View>
+                        <Text style={styles.priceText}>${item.price}</Text>
                     </View>
                 </View >
             </TouchableOpacity>
@@ -63,6 +72,18 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: colors.white,
 
+    }, itemText: {
+        fontSize: 16,
+        fontWeight: '600',
+        color: colors.black,
+        marginBottom: 10
+    }, locationText: {
+        fontSize: 12,
+        marginLeft: 4
+    }, priceText: {
+        fontSize: 12,
+        fontWeight: "600",
+        color: colors.primaryColor,
     }
 
 })
