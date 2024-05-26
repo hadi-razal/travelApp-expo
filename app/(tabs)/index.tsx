@@ -1,15 +1,23 @@
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { Stack } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
 import colors from '@/constant/colors'
 import { useHeaderHeight } from '@react-navigation/elements'
 import CategoryButton from '@/components/CategoryButton'
+import Lisitings from '@/components/Lisitings'
+import ListingData from '@/data/destination.json'
 
 const Page = () => {
 
 
     const headerHeight = useHeaderHeight()
+    const [category, setCategory] = useState("All")
+
+    const onCategoryChanged = (category: string) => {
+        console.log("Category : ", category)
+        setCategory(category)
+    }
 
 
     return (
@@ -19,7 +27,7 @@ const Page = () => {
                 headerTitle: "",
                 headerLeft: () => (
                     <TouchableOpacity>
-                        <Image source={{ uri: "https://xsgames.co/randomusers/avatar.php?g=female" }} style={{ width: 45, height: 45, borderRadius: 10, marginLeft: 10 }} />
+                        <Image source={{ uri: "https://xsgames.co/randomusers/avatar.php?g=male" }} style={{ width: 45, height: 45, borderRadius: 10, marginLeft: 10 }} />
                     </TouchableOpacity>
                 ),
                 headerRight: () => (
@@ -51,7 +59,9 @@ const Page = () => {
                 </View>
 
 
-                <CategoryButton />
+                <CategoryButton onCategoryChanged={onCategoryChanged} />
+
+                <Lisitings listings={ListingData} />
 
 
             </View >
@@ -74,7 +84,7 @@ const styles = StyleSheet.create({
         fontSize: 28,
         fontWeight: '800',
         color: colors.black,
-        marginTop: 10,
+        paddingVertical: 10,
         textAlign: "center",
     }, searchSectionWrapper: {
         flexDirection: 'row',
