@@ -5,11 +5,14 @@ import { Ionicons } from '@expo/vector-icons'
 import colors from '@/constant/colors'
 import { useHeaderHeight } from '@react-navigation/elements'
 import CategoryButton from '@/components/CategoryButton'
-import Lisitings from '@/components/Lisitings'
+import Listings from '@/components/Listings'
 import ListingData from '@/data/destination.json'
+import groupData from '@/data/group.json'
+import GroupListings from '@/components/GroupListings'
+import { ScrollView } from 'react-native-reanimated/lib/typescript/Animated'
+
 
 const Page = () => {
-
 
     const headerHeight = useHeaderHeight()
     const [category, setCategory] = useState("All")
@@ -61,10 +64,12 @@ const Page = () => {
 
                 <CategoryButton onCategoryChanged={onCategoryChanged} />
 
-                <Lisitings listings={ListingData} />
+                <Listings listings={ListingData} category={category} />
+
+                <GroupListings listings={groupData} />
 
 
-            </View >
+            </View  >
 
         </>
 
